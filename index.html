@@ -1092,13 +1092,18 @@ async function finalizarPedido(){
 
   // Tenta enviar para o api-server (opcional — funciona offline também)
   try {
-    await fetch('https://api.eusalrosa.com.br/api/pedido', {
-  method:'POST',
-  headers:{
-    'Content-Type':'application/json',
-    'Authorization':'Bearer @Salrosa9172'
-  },
-  body:JSON.stringify(payload)
+    const resp = await fetch(
+  'https://api.eusalrosa.com.br/api/pedido',
+  {
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json'
+    },
+    body: JSON.stringify(pedido)
+  }
+);
+
+console.log(await resp.text());
 });
   } catch(e){ /* offline — dados já salvos no localStorage */ }
 
