@@ -1092,20 +1092,23 @@ async function finalizarPedido(){
 
   // Tenta enviar para o api-server (opcional — funciona offline também)
   try {
-    const resp = await fetch(
-  'https://api.eusalrosa.com.br/api/pedido',
-  {
-    method:'POST',
-    headers:{
-      'Content-Type':'application/json'
-    },
-    body: JSON.stringify(pedido)
-  }
-);
+  const resp = await fetch(
+    'https://api.eusalrosa.com.br/api/pedido',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(pedido)
+    }
+  );
 
-console.log(await resp.text());
-});
-  } catch(e){ /* offline — dados já salvos no localStorage */ }
+  console.log(await resp.text());
+
+} catch (e) {
+  console.error('Erro ao enviar pedido:', e);
+  // offline — dados já salvos no localStorage
+}
 
   mostrarSucesso(pedido);
 }
